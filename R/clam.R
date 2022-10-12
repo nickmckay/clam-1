@@ -485,6 +485,7 @@ clam <- function(core="Example", type=1, smooth=NULL, prob=0.95, its=1000, cored
 
     if(storedat)
     {
+      assign(paste0("chron",paste(sample(0:9,size = 10,replace = TRUE),collapse = "")),value = chron,envir = .GlobalEnv)
       if(exists("allchron",envir = .GlobalEnv)){
         allchron <- get("allchron",envir = .GlobalEnv)
         allchron <- append(allchron,chron)
@@ -492,6 +493,7 @@ clam <- function(core="Example", type=1, smooth=NULL, prob=0.95, its=1000, cored
       }else{
         allchron <<- list(chron)
       }
+      set()
       chron <<- chron
       smp <<- smp
     }
