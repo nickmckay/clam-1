@@ -484,10 +484,17 @@ clam <- function(core="Example", type=1, smooth=NULL, prob=0.95, its=1000, cored
         .assign_to_global(".ageofdepth", chron[which(depthseq==ageofdepth),]) 
 
     if(storedat)
-      {
-        chron <<- chron
-        smp <<- smp
+    {
+      if(exists("allchron",envir = .GlobalEnv)){
+        allchron <- get("allchron",envir = .GlobalEnv)
+        allchron <- append(allchron,chron)
+        allchron <<- chron
+      }else{
+        allchron <<- list(chron)
       }
+      chron <<- chron
+      smp <<- smp
+    }
 
     # find uncertainty ranges of calendar age for each depth of the core
     calrange <- array(0, dim=c(nrow(chron), 2))
